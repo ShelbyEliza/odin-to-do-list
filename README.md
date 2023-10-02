@@ -41,6 +41,32 @@ DOM View Module
   - Mark off todos on checklist
 - Delete a todo
 
+### Views
+
+#### Nav Bar
+
+Homepage, Create Page
+
+#### Homepage:
+
+Displays each project and up to 12 todos for each project.
+Projects are clickable and link to Full Project Page.
+
+#### Full Project Page:
+
+- Displays all todos.
+- Option to edit project details.
+- Add or Delete todos.
+- Option to edit specific todos.
+
+#### Create Page:
+
+1. Link to an existing or new project?
+2. Title
+3. Due Date
+4. Description
+5. Priority
+
 #### Useful Links
 
 [date-fns](https://github.com/date-fns/date-fns)
