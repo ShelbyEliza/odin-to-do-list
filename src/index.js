@@ -1,29 +1,30 @@
 import "./styles.css";
 
 import { HTMLElement, NavButton } from "./helper.js";
-
-import { ProjectController } from "./projects";
+import { ProjectController } from "./projects.js";
+import { NavController } from "./nav.js";
 
 const fullPageDiv = document.getElementById("content");
 
+/** Build Header Content: */
 const header = new HTMLElement("header", "site-header", fullPageDiv);
 
-const siteTitle = new HTMLElement(
+new HTMLElement(
 	"h1",
 	"site-title-el",
 	header.getElement(),
 	"To Do Or Not To Do?"
 );
 
-const siteSubTitle = new HTMLElement(
+new HTMLElement(
 	"p",
 	"site-sub-title-el",
 	header.getElement(),
 	"That is the task"
 );
-const pageContent = new HTMLElement("div", "page-content", fullPageDiv);
 
-const navBar = new HTMLElement("nav", "nav-bar", header.getElement());
+/** Build Page Content: */
+const pageContent = new HTMLElement("div", "page-content", fullPageDiv);
 
 function Nav() {
 	const tabs = [];
@@ -45,37 +46,24 @@ function Nav() {
 
 	const getTab = () => tabs;
 }
+console.log(header.dom);
+const navView = new NavController(header.dom);
 
-function NavControler() {
-	const nav = Nav();
-	let activeTab = nav.homeTab;
+const projectsView = new ProjectController(pageContent.getElement());
 
-	function switchTabs(selectedTab, module) {
-		if (selectedTab !== activeTab) {
-			while (pageContent.firstChild) {
-				pageContent.removeChild(tabContentDiv.firstChild);
-			}
-			tabContentDiv.appendChild(module);
-			prevTab = newTab;
-		}
-	}
-}
-
-const view = new ProjectController(pageContent.getElement());
-
-view.createProject([
+projectsView.createProject([
 	"Clean the House",
 	"10/05/2023",
 	"Clean up the kitchen, living room, and bathroom.",
 	5,
 	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
-	view.myProjects,
+	projectsView.myProjects,
 ]);
-view.createProject([
+projectsView.createProject([
 	"Make Dinner",
 	"10/05/2023",
 	"Clean up the kitchen, living room, and bathroom.",
 	5,
 	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
-	view.myProjects,
+	projectsView.myProjects,
 ]);

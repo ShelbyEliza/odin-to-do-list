@@ -1,9 +1,3 @@
-function Nav() {}
-
-function NavControler() {
-	let activeTab = "home";
-}
-
 class HTMLElement {
 	constructor(element, className, parentElement, textContent) {
 		this.parentElement = parentElement;
