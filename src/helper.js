@@ -7,19 +7,19 @@ function NavControler() {
 class HTMLElement {
 	constructor(element, className, parentElement, textContent) {
 		this.parentElement = parentElement;
-		this.title = document.createElement(element);
-		this.title.classList.add(className);
+		this.dom = document.createElement(element);
+		this.dom.classList.add(className);
 
 		if (textContent) {
-			this.title.textContent = textContent;
+			this.dom.textContent = textContent;
 		}
-		this.parentElement.appendChild(this.title);
+		this.parentElement.appendChild(this.dom);
 	}
 	getElement() {
-		return this.title;
+		return this.dom;
 	}
 	addToClassList() {
-		this.title.classList.add(className);
+		this.dom.classList.add(className);
 	}
 }
 
@@ -28,9 +28,9 @@ class NavButton extends HTMLElement {
 		super(element, className, parentElement, textContent);
 
 		this.id = textContent.toLowerCase();
-		this.title.addEventListener("click", () => {
-			if (!this.title.classList.contains("active")) {
-				this.title.classList.add("active");
+		this.dom.addEventListener("click", () => {
+			if (!this.dom.classList.contains("active")) {
+				this.dom.classList.add("active");
 			}
 		});
 	}

@@ -2,6 +2,8 @@ import "./styles.css";
 
 import { HTMLElement, NavButton } from "./helper.js";
 
+import { ProjectController } from "./projects";
+
 const fullPageDiv = document.getElementById("content");
 
 const header = new HTMLElement("header", "site-header", fullPageDiv);
@@ -47,9 +49,8 @@ function Nav() {
 function NavControler() {
 	const nav = Nav();
 	let activeTab = nav.homeTab;
-	// pageContent.appendChild()
 
-	function switchTabs(selectedTab) {
+	function switchTabs(selectedTab, module) {
 		if (selectedTab !== activeTab) {
 			while (pageContent.firstChild) {
 				pageContent.removeChild(tabContentDiv.firstChild);
@@ -60,6 +61,21 @@ function NavControler() {
 	}
 }
 
-// console.log(siteTitle.getElement());
+const view = new ProjectController(pageContent.getElement());
 
-// siteTitle.appendChildEl(fullPageDiv);
+view.createProject([
+	"Clean the House",
+	"10/05/2023",
+	"Clean up the kitchen, living room, and bathroom.",
+	5,
+	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
+	view.myProjects,
+]);
+view.createProject([
+	"Make Dinner",
+	"10/05/2023",
+	"Clean up the kitchen, living room, and bathroom.",
+	5,
+	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
+	view.myProjects,
+]);
