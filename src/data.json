@@ -1,0 +1,38 @@
+{
+	"projects": {
+		"activeProjects": [
+			{
+				"title": "Play with Cats",
+				"dueDate": "11/12/2023",
+				"description": "Cats need to be played with daily!",
+				"priority": "10",
+				"todos": ["Pet cats", "Chase cats", "Treat cats"]
+			},
+			{
+				"title": "Clean the House",
+				"dueDate": "10/05/2023",
+				"description": "Clean up the kitchen, living room, and bathroom.",
+				"priority": "5",
+				"todos": [
+					"Plan meal",
+					"Add ingredients to the list",
+					"Buy groceries",
+					"Cook dinner"
+				]
+			},
+			{
+				"title": "Make Dinner",
+				"dueDate": "02/17/2023",
+				"description": "Prepare a lovely meal for the family.",
+				"priority": "4",
+				"todos": [
+					"Plan meal",
+					"Add ingredients to the list",
+					"Buy groceries",
+					"Cook dinner"
+				]
+			}
+		],
+		"archived": []
+	}
+}

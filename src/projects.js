@@ -83,7 +83,7 @@ class ProjectController {
 	}
 
 	getMyProjects() {
-		return this.myProjects;
+		return this.myProjects.allProjects;
 	}
 }
 

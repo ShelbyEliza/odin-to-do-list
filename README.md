@@ -31,6 +31,12 @@ Application Logic Module
 
 DOM View Module
 
+User creates project data through a form.
+Project data is saved to localStorage.
+
+User is directed to a newly created Project page.
+Dom elements are populated from storage data.
+
 ### User Interface
 
 - View all projects

@@ -1,8 +1,11 @@
 import "./styles.css";
 
-import { HTMLElement, NavButton } from "./helper.js";
+import { HTMLElement } from "./helper.js";
 import { ProjectController } from "./projects.js";
-import { NavController } from "./nav.js";
+import { Nav, NavController } from "./nav.js";
+import { CreateForm } from "./create";
+import Data from "./data.json";
+import { LocalData } from "./storageAvailable";
 
 const fullPageDiv = document.getElementById("content");
 
@@ -26,44 +29,12 @@ new HTMLElement(
 /** Build Page Content: */
 const pageContent = new HTMLElement("div", "page-content", fullPageDiv);
 
-function Nav() {
-	const tabs = [];
-
-	const homeTab = new NavButton(
-		"button",
-		"tab",
-		navBar.getElement(),
-		"Projects"
-	);
-	const createTab = new NavButton(
-		"button",
-		"tab",
-		navBar.getElement(),
-		"Create"
-	);
-
-	tabs.push(homeTab, createTab);
-
-	const getTab = () => tabs;
-}
-console.log(header.dom);
+/** Create NavBar: */
+// const navView = new NavController(header.dom);
 const navView = new NavController(header.dom);
+console.log(navView.allTabs);
 
 const projectsView = new ProjectController(pageContent.getElement());
-
-projectsView.createProject([
-	"Clean the House",
-	"10/05/2023",
-	"Clean up the kitchen, living room, and bathroom.",
-	5,
-	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
-	projectsView.myProjects,
-]);
-projectsView.createProject([
-	"Make Dinner",
-	"10/05/2023",
-	"Clean up the kitchen, living room, and bathroom.",
-	5,
-	["Do the Dishes", "Vacuum", "Clean the Cat Litter", "Clean the Toilet"],
-	projectsView.myProjects,
-]);
+const createView = new CreateForm(pageContent.getElement());
+/** Storage Control: */
+let localStore = new LocalData("projects", Data.projects, projectsView);
