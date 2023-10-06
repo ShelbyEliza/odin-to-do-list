@@ -41,33 +41,33 @@ class Button extends HTMLElement {
 	}
 }
 
-class NavButton extends HTMLElement {
-	constructor(element, className, parentElement, value) {
-		super(element, className, parentElement, value);
+// class NavButton extends HTMLElement {
+// 	constructor(element, className, parentElement, value) {
+// 		super(element, className, parentElement, value);
 
-		if (value === "Projects") {
-			this.isActive = true;
-		} else if (value === "Create") {
-			this.isActive = false;
-		}
-		this.dom.value = value;
-		this.dom.id = value.toLowerCase();
-		this.dom.addEventListener("click", (e) => {
-			e.preventDefault();
-			let selectedTab = e.target.value;
+// 		if (value === "Projects") {
+// 			this.isActive = true;
+// 		} else if (value === "Create") {
+// 			this.isActive = false;
+// 		}
+// 		this.dom.value = value;
+// 		this.dom.id = value.toLowerCase();
+// 		this.dom.addEventListener("click", (e) => {
+// 			e.preventDefault();
+// 			let selectedTab = e.target.value;
 
-			if (!this.dom.classList.contains("active")) {
-				this.dom.classList.add("active");
-			}
-		});
-	}
+// 			if (!this.dom.classList.contains("active")) {
+// 				this.dom.classList.add("active");
+// 			}
+// 		});
+// 	}
 
-	setActive(prevActive, newActive) {
-		if (prevActive === newActive) {
-			return;
-		}
-	}
-}
+// 	setActive(prevActive, newActive) {
+// 		if (prevActive === newActive) {
+// 			return;
+// 		}
+// 	}
+// }
 
 class InputElement extends HTMLElement {
 	constructor(element, className, parentElement, type) {
@@ -76,4 +76,4 @@ class InputElement extends HTMLElement {
 	}
 }
 
-export { HTMLElement, NavButton, InputElement, Button };
+export { HTMLElement, InputElement, Button };

@@ -2,7 +2,7 @@ import "./styles.css";
 
 import { HTMLElement } from "./helper.js";
 import { ProjectController } from "./projects.js";
-import { Nav, NavController } from "./nav.js";
+import { NavController } from "./nav.js";
 import { CreateForm } from "./create";
 import Data from "./data.json";
 import { LocalData } from "./storageAvailable";
@@ -30,9 +30,16 @@ new HTMLElement(
 const pageContent = new HTMLElement("div", "page-content", fullPageDiv);
 
 /** Create NavBar: */
-// const navView = new NavController(header.dom);
 const navView = new NavController(header.dom);
-console.log(navView.allTabs);
+
+navView.homeTab.dom.addEventListener("click", (e) => {
+	e.preventDefault();
+	navView.switchActiveTab(e.target);
+});
+navView.createTab.dom.addEventListener("click", (e) => {
+	e.preventDefault();
+	navView.switchActiveTab(e.target);
+});
 
 const projectsView = new ProjectController(pageContent.getElement());
 const createView = new CreateForm(pageContent.getElement());

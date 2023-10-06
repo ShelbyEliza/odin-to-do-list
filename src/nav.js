@@ -1,81 +1,58 @@
-import { HTMLElement } from "./helper.js";
-
-class Nav {
+class Navbar {
 	allTabs = [];
-	constructor(parentElement) {
-		this.navWrapper = new HTMLElement("nav", "nav-bar", parentElement);
+	constructor(element, className, parentElement) {
+		this.dom = document.createElement(element);
+		this.parentElement = parentElement;
 
-		this.homeTab = new HTMLElement(
-			"button",
-			"tab",
-			this.navWrapper.dom,
-			"Projects"
-		);
-		this.createTab = new HTMLElement(
-			"button",
-			"tab",
-			this.navWrapper.dom,
-			"Create"
-		);
+		if (className !== "") {
+			this.dom.classList.add(className);
+		}
 
-		this.allTabs.push(this.homeTab, this.createTab);
-		this.activeTab = this.homeTab;
-		// this.allTabs.forEach((tab) => {
-		// 	tab.dom.addEventListener("click", function (e) {
-		// 		e.preventDefault();
-		// 		let selectedTab = e.target.textContent;
-		// 		console.log(selectedTab);
-
-		// 		this.switchActiveStatus(selectedTab);
-		// 	});
-		// });
+		this.parentElement.appendChild(this.dom);
 	}
 
-	switchActiveStatus(selectedTab) {
-		if (selectedTab === this.activeTab) {
-			console.log("Tab already selected");
-			return;
-		} else {
-			if (this.homeTab === selectedTab) {
-				this.homeTab.classList.add("active");
-				this.createTab.classList.remove("active");
-			} else {
-				this.createTab.classList.add("active");
-				this.homeTab.classList.remove("active");
-			}
-			this.activeTab = selectedTab;
-		}
+	getElement() {
+		return this.dom;
+	}
+	addToClassList() {
+		this.dom.classList.add(className);
+	}
+	addTab(tab) {
+		this.allTabs.push(tab);
+	}
+	setActiveTab(tab) {
+		this.activeTab = tab;
+	}
+}
+
+class NavButton extends Navbar {
+	constructor(element, className, parentElement, textContent) {
+		super(element, className, parentElement);
+		this.dom.textContent = textContent;
+		this.dom.id = textContent.toLowerCase();
 	}
 }
 
 class NavController {
 	constructor(parentEl) {
 		this.parentEl = parentEl;
-		this.navView = new Nav(this.parentEl);
-		console.log(this.navView);
-		this.navView.allTabs.forEach(function (tab) {
-			tab.dom.addEventListener("click", function (e) {
-				e.preventDefault();
-				let selectedTab = e.target.textContent;
-				console.log(selectedTab);
+		this.nav = new Navbar("nav", "navbar", this.parentEl);
+		this.homeTab = new NavButton("button", "tab", this.nav.dom, "Projects");
+		this.createTab = new NavButton("button", "tab", this.nav.dom, "Create");
 
-				if (selectedTab === this.activeTab) {
-					console.log(this.activeTab);
-					console.log("Tab already selected");
-					return;
-				} else {
-					if (this.homeTab === selectedTab) {
-						this.homeTab.classList.add("active");
-						this.createTab.classList.remove("active");
-					} else {
-						this.createTab.classList.add("active");
-						this.homeTab.classList.remove("active");
-					}
-					this.activeTab = selectedTab;
-				}
-			});
+		this.nav.addTab(this.homeTab);
+		this.nav.setActiveTab(this.homeTab);
+		this.nav.addTab(this.createTab);
+	}
+	switchActiveTab(selectedTab) {
+		this.nav.allTabs.forEach((tab) => {
+			if (tab.dom.id === selectedTab.id) {
+				tab.dom.classList.add("active");
+			} else {
+				tab.dom.classList.remove("active");
+			}
 		});
 	}
 }
 
-export { Nav, NavController };
+export { NavController };
