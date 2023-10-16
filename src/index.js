@@ -1,12 +1,12 @@
 import "./styles.css";
 
-import { HTMLElement } from "./helper.js";
-import { NavController } from "./nav.js";
-import { CreateForm } from "./create";
 import Data from "./data.json";
+import { HeaderController } from "./header";
+import { HTMLElement } from "./helper.js";
+import { NavController } from "./navController";
+import { CreateForm } from "./create";
 import { LocalData } from "./storageAvailable";
 import { CardController } from "./cardController.js";
-import { HeaderController } from "./header";
 
 class App {
 	constructor() {
@@ -27,17 +27,12 @@ class App {
 		/** Create NavBar: */
 		this.setPrevTab("projects");
 		const navView = new NavController(headerController.header.dom);
-
-		navView.homeTab.dom.addEventListener("click", (e) => {
-			e.preventDefault();
-			navView.switchActiveTab(e.target);
-			this.controlNav(e.target.id, cardController.allCardsWrapper.wrapper);
-		});
-		navView.createTab.dom.addEventListener("click", (e) => {
-			e.preventDefault();
-			navView.switchActiveTab(e.target);
-			this.controlNav(e.target.id, createView.wrapper);
-		});
+		navView.buildTab(
+			"Projects",
+			cardController.allCardsWrapper.wrapper,
+			this.pageContent.dom
+		);
+		navView.buildTab("Create", createView.wrapper, this.pageContent.dom);
 
 		/** Storage Control: */
 		let localStore = new LocalData("projects", Data.projects, cardController);
