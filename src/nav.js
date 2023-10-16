@@ -23,7 +23,9 @@ class Navbar {
 	}
 	setActiveTab(tab) {
 		this.activeTab = tab;
-		console.log(tab);
+	}
+	addClass(element, className) {
+		element.classList.add(className);
 	}
 }
 
@@ -43,16 +45,14 @@ class NavController {
 		this.parentEl = parentEl;
 		this.nav = new Navbar("nav", "navbar", this.parentEl);
 		this.homeTab = new NavButton("button", "tab", this.nav.dom, "Projects");
+		this.homeTab.dom.classList.add("active");
 		this.createTab = new NavButton("button", "tab", this.nav.dom, "Create");
 
 		this.nav.addTab(this.homeTab);
 		this.nav.addTab(this.createTab);
 		this.nav.setActiveTab(this.homeTab);
-		console.log(this.homeTab);
-		console.log(this.nav.activeTab);
 	}
 	switchActiveTab(selectedTab) {
-		console.log(selectedTab.id, this.nav);
 		this.nav.allTabs.forEach((tab) => {
 			if (selectedTab.id !== this.nav.activeTab.id) {
 				if (tab.dom.id === selectedTab.id) {

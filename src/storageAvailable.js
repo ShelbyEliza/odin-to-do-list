@@ -31,7 +31,7 @@ function LocalData(location, data, projViewObj) {
 	} else {
 		if (Storage.length > 0) {
 			/** user has existing storage */
-			console.log(Storage);
+			console.log("User has existing Storage:", Storage);
 		} else {
 			/** TODO: Remove Dumbie Data */
 			setLocalStorage(location, data, projViewObj);
@@ -50,7 +50,7 @@ function setLocalStorage(location, data, projViewObj) {
 			for (const prop in project) {
 				keys.push(project[prop]);
 			}
-			projViewObj.createProject(keys);
+			projViewObj.addCard(keys);
 		});
 	}
 }

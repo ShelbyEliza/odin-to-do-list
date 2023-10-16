@@ -9,7 +9,11 @@ class HTMLElement {
 		if (textContent) {
 			this.dom.textContent = textContent;
 		}
-		this.parentElement.appendChild(this.dom);
+		if (parentElement) {
+			this.parentElement.appendChild(this.dom);
+		} else {
+			console.log("Element has not been appended to dom");
+		}
 	}
 	getElement() {
 		return this.dom;

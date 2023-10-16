@@ -1,8 +1,10 @@
 import { HTMLElement, InputElement, Button } from "./helper";
 
 class CreateForm {
-	constructor(parentEl) {
-		this.wrapper = new HTMLElement("div", "form-wrapper", parentEl);
+	constructor(parentElement) {
+		// this.wrapper = new HTMLElement("div", "form-wrapper", parentEl);
+		this.wrapper = new HTMLElement("div", "form-wrapper");
+
 		this.form = new HTMLElement("form", "", this.wrapper.dom);
 		this.formTitle = new HTMLElement(
 			"h2",
@@ -66,7 +68,9 @@ class CreateForm {
 			"Submit"
 		);
 	}
-
+	appendToDom(parentEl) {
+		parentEl.appendChild(this.wrapper.dom);
+	}
 	todosList = [];
 }
 export { CreateForm };

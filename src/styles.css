@@ -46,7 +46,7 @@ button:hover {
 }
 
 #content {
-	width: 90%;
+	/* width: 90%; */
 	margin: 0 auto;
 }
 .site-header {
@@ -55,4 +55,19 @@ button:hover {
 .active {
 	color: pink;
 	border: 2px solid black;
+}
+
+/** Cards: */
+
+.all-cards-wrapper {
+	background-color: black;
+	display: flex;
+	padding: 1rem;
+	gap: 0.8rem;
+}
+.card-wrapper {
+	background-color: white;
+	color: black;
+	padding: 1rem 1.2rem;
+	border: 1px solid black;
 }

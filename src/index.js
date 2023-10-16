@@ -1,47 +1,60 @@
 import "./styles.css";
 
 import { HTMLElement } from "./helper.js";
-import { ProjectController } from "./projects.js";
 import { NavController } from "./nav.js";
 import { CreateForm } from "./create";
 import Data from "./data.json";
 import { LocalData } from "./storageAvailable";
+import { CardController } from "./cardController.js";
+import { HeaderController } from "./header";
 
-const fullPageDiv = document.getElementById("content");
+class App {
+	constructor() {
+		const fullPageDiv = document.getElementById("content");
 
-/** Build Header Content: */
-const header = new HTMLElement("header", "site-header", fullPageDiv);
+		/** Build Header Content: */
+		const headerController = new HeaderController(fullPageDiv);
 
-new HTMLElement(
-	"h1",
-	"site-title-el",
-	header.getElement(),
-	"To Do Or Not To Do?"
-);
+		/** Build Page Content: */
+		this.pageContent = new HTMLElement("div", "page-content", fullPageDiv);
 
-new HTMLElement(
-	"p",
-	"site-sub-title-el",
-	header.getElement(),
-	"That is the task"
-);
+		/** Build AllCards DOM: */
+		const cardController = new CardController(this.pageContent.dom);
 
-/** Build Page Content: */
-const pageContent = new HTMLElement("div", "page-content", fullPageDiv);
+		/** Build Create Form: */
+		const createView = new CreateForm();
 
-/** Create NavBar: */
-const navView = new NavController(header.dom);
+		/** Create NavBar: */
+		this.setPrevTab("projects");
+		const navView = new NavController(headerController.header.dom);
 
-navView.homeTab.dom.addEventListener("click", (e) => {
-	e.preventDefault();
-	navView.switchActiveTab(e.target);
-});
-navView.createTab.dom.addEventListener("click", (e) => {
-	e.preventDefault();
-	navView.switchActiveTab(e.target);
-});
+		navView.homeTab.dom.addEventListener("click", (e) => {
+			e.preventDefault();
+			navView.switchActiveTab(e.target);
+			this.controlNav(e.target.id, cardController.allCardsWrapper.wrapper);
+		});
+		navView.createTab.dom.addEventListener("click", (e) => {
+			e.preventDefault();
+			navView.switchActiveTab(e.target);
+			this.controlNav(e.target.id, createView.wrapper);
+		});
 
-const projectsView = new ProjectController(pageContent.getElement());
-const createView = new CreateForm(pageContent.getElement());
-/** Storage Control: */
-let localStore = new LocalData("projects", Data.projects, projectsView);
+		/** Storage Control: */
+		let localStore = new LocalData("projects", Data.projects, cardController);
+	}
+	/** Control Navigation Function: */
+	controlNav(newTab, module) {
+		if (newTab !== this.prevTab) {
+			while (this.pageContent.dom.firstChild) {
+				this.pageContent.dom.removeChild(this.pageContent.dom.firstChild);
+			}
+			this.pageContent.dom.appendChild(module.dom);
+			this.setPrevTab(newTab);
+		}
+	}
+	setPrevTab(aNewTab) {
+		this.prevTab = aNewTab;
+	}
+}
+
+let app = new App();
