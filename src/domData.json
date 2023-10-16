@@ -1,0 +1,86 @@
+{
+	"DOM": {
+		"title": "fullPageDiv",
+		"classNames": ["content"],
+		"dom": "div",
+		"parent": "html",
+		"text-content": "",
+		"children": [
+			{
+				"title": "header",
+				"classNames": ["site-header"],
+				"dom": "header",
+				"parent": "fullPageDiv",
+				"text-content": "",
+				"children": [
+					{
+						"title": "site-title",
+						"classNames": ["site-title-el"],
+						"dom": "h1",
+						"parent": "header",
+						"text-content": "To Do Or Not To Do?",
+						"children": []
+					},
+					{
+						"title": "site-sub-title",
+						"classNames": ["site-sub-title-el"],
+						"dom": "p",
+						"parent": "header",
+						"text-content": "That is the task.",
+						"children": []
+					},
+					{
+						"title": "navBar",
+						"classNames": ["nav-bar"],
+						"dom": "nav",
+						"parent": "header",
+						"text-content": "",
+						"children": [
+							{
+								"title": "homeTab",
+								"classNames": ["tab", "home", "projects", "active"],
+								"dom": "button",
+								"parent": "navBar",
+								"text-content": "Projects",
+								"children": []
+							},
+							{
+								"title": "createTab",
+								"classNames": ["tab", "create"],
+								"dom": "button",
+								"parent": "navBar",
+								"text-content": "Create",
+								"children": []
+							}
+						]
+					}
+				]
+			},
+			{
+				"title": "pageContent",
+				"classNames": ["page-content"],
+				"dom": "div",
+				"parent": "fullPageDiv",
+				"text-content": "",
+				"children": [
+					{
+						"title": "projectsPage",
+						"classNames": ["project-page"],
+						"dom": "div",
+						"parent": "fullPageDiv",
+						"text-content": "",
+						"children": []
+					},
+					{
+						"title": "createPage",
+						"classNames": ["create-page"],
+						"dom": "div",
+						"parent": "fullPageDiv",
+						"text-content": "",
+						"children": []
+					}
+				]
+			}
+		]
+	}
+}
