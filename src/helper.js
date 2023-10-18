@@ -1,9 +1,15 @@
 class HTMLElement {
-	constructor(element, className, parentElement, textContent) {
+	constructor(element, classNames, parentElement, textContent) {
 		this.parentElement = parentElement;
 		this.dom = document.createElement(element);
-		if (className !== "") {
-			this.dom.classList.add(className);
+		if (classNames.length >= 0) {
+			if (classNames.length === 1) {
+				this.dom.classList.add(classNames[0]);
+			} else {
+				classNames.forEach((name) => {
+					this.dom.classList.add(name);
+				});
+			}
 		}
 
 		if (textContent) {
@@ -12,7 +18,7 @@ class HTMLElement {
 		if (parentElement) {
 			this.parentElement.appendChild(this.dom);
 		} else {
-			console.log("Element has not been appended to dom");
+			// console.log("Element has not been appended to dom");
 		}
 	}
 	getElement() {
@@ -28,21 +34,21 @@ class Button extends HTMLElement {
 		super(element, className, parentElement, value);
 
 		this.dom.value = value;
-		this.dom.addEventListener("click", (e) => {
-			e.preventDefault();
-			if (this.value === "Add To Do") {
-				this.addToDo(e);
-			} else {
-				submitForm(e);
-			}
-		});
+		// this.dom.addEventListener("click", (e) => {
+		// 	e.preventDefault();
+		// 	if (this.value === "Add To Do") {
+		// 		this.addToDo(e);
+		// 	} else {
+		// 		submitForm(e);
+		// 	}
+		// });
 	}
-	addToDo(e) {
-		console.log(e);
-	}
-	submitForm(e) {
-		console.log(e);
-	}
+	// addToDo(e) {
+	// 	console.log(e);
+	// }
+	// submitForm(e) {
+	// 	console.log(e);
+	// }
 }
 
 class InputElement extends HTMLElement {

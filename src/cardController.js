@@ -2,10 +2,10 @@ import { HTMLElement } from "./helper";
 
 class AllCards {
 	constructor(pageWrapper) {
-		this.wrapper = new HTMLElement("div", "all-cards-wrapper", pageWrapper);
+		this.wrapper = new HTMLElement("div", ["all-cards-wrapper"], pageWrapper);
 		this.allCardsHeading = new HTMLElement(
 			"h2",
-			"page-heading",
+			["page-heading"],
 			this.wrapper.dom,
 			"All Projects"
 		);
@@ -13,25 +13,36 @@ class AllCards {
 }
 
 class Card {
-	constructor(parentElement, title, dueDate, description, priority, todos) {
-		this.wrapper = new HTMLElement("div", "card-wrapper", parentElement);
-		this.title = new HTMLElement("h3", "title", this.wrapper.dom, title);
-		this.dueDate = new HTMLElement("p", "due-date", this.wrapper.dom, dueDate);
+	constructor(parentElement, id, title, dueDate, description, priority, todos) {
+		this.wrapper = new HTMLElement("div", ["card-wrapper"], parentElement);
+
+		this.id = id;
+		this.title = new HTMLElement("h3", ["title"], this.wrapper.dom, title);
+		this.dueDate = new HTMLElement(
+			"p",
+			["due-date"],
+			this.wrapper.dom,
+			dueDate
+		);
 		this.description = new HTMLElement(
 			"p",
-			"description",
+			["description"],
 			this.wrapper.dom,
 			description
 		);
 		this.priority = new HTMLElement(
 			"p",
-			"priority",
+			["priority"],
 			this.wrapper.dom,
 			priority
 		);
-		this.todoWrapper = new HTMLElement("ul", "todos-wrapper", this.wrapper.dom);
+		this.todoWrapper = new HTMLElement(
+			"ul",
+			["todos-wrapper"],
+			this.wrapper.dom
+		);
 		todos.forEach((todo) => {
-			new HTMLElement("li", "todo", this.todoWrapper.dom, todo);
+			new HTMLElement("li", ["todo"], this.todoWrapper.dom, todo);
 		});
 	}
 }
@@ -47,7 +58,9 @@ class CardController {
 	}
 
 	addCard(projectProps) {
-		new Card(this.allCardsWrapper.wrapper.dom, ...projectProps);
+		// console.log(this.allCardsWrapper.wrapper.dom);
+
+		return new Card(this.allCardsWrapper.wrapper.dom, ...projectProps);
 	}
 }
 

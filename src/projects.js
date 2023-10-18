@@ -40,12 +40,12 @@ class ProjectController {
 	constructor(parentElement) {
 		this.projectsParent = new HTMLElement(
 			"div",
-			"projects-wrapper",
+			["projects-wrapper"],
 			parentElement
 		);
 		let allProjectsHeading = new HTMLElement(
 			"h2",
-			"page-heading",
+			["page-heading"],
 			this.projectsParent.dom,
 			"All Projects"
 		);
@@ -54,18 +54,18 @@ class ProjectController {
 	addProjectDOM(project) {
 		let projectWrapper = new HTMLElement(
 			"div",
-			"project-wrapper",
+			["project-wrapper"],
 			this.projectsParent.dom
 		);
 		this.projectTitle = new HTMLElement(
 			"h3",
-			"title",
+			["title"],
 			projectWrapper.dom,
 			project.title
 		);
 		this.projectDueDate = new HTMLElement(
 			"p",
-			"due-date",
+			["due-date"],
 			projectWrapper.dom,
 			project.dueDate
 		);

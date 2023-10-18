@@ -16,7 +16,7 @@ class Tab {
 class NavController {
 	constructor(parentEl) {
 		this.allTabs = [];
-		this.navWrapper = new HTMLElement("nav", "nav-wrapper", parentEl);
+		this.navWrapper = new HTMLElement("nav", ["nav-wrapper"], parentEl);
 		this.activeTabID = null;
 	}
 

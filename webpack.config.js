@@ -15,6 +15,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "To Do List",
+			favicon: "./src/images/favicon.svg",
 			template: "template.html",
 		}),
 	],

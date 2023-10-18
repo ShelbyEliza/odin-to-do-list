@@ -1,14 +1,8 @@
 {
 	"projects": {
-		"activeProjects": [
+		"active": [
 			{
-				"title": "Play with Cats",
-				"dueDate": "11/12/2023",
-				"description": "Cats need to be played with daily!",
-				"priority": "10",
-				"todos": ["Pet cats", "Chase cats", "Treat cats"]
-			},
-			{
+				"id": "1",
 				"title": "Clean the House",
 				"dueDate": "10/05/2023",
 				"description": "Clean up the kitchen, living room, and bathroom.",
@@ -21,6 +15,28 @@
 				]
 			},
 			{
+				"id": "2",
+				"title": "Play with Cats",
+				"dueDate": "11/12/2023",
+				"description": "Clean up the kitchen, living room, and bathroom.",
+				"priority": "5",
+				"todos": [
+					"Plan meal",
+					"Add ingredients to the list",
+					"Buy groceries",
+					"Cook dinner"
+				]
+			},
+			{
+				"id": "3",
+				"title": "Play with Cats",
+				"dueDate": "11/12/2023",
+				"description": "Cats need to be played with daily!",
+				"priority": "10",
+				"todos": ["Pet cats", "Chase cats", "Treat cats"]
+			},
+			{
+				"id": "4",
 				"title": "Make Dinner",
 				"dueDate": "02/17/2023",
 				"description": "Prepare a lovely meal for the family.",

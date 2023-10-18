@@ -42,17 +42,33 @@ function LocalData(location, data, projViewObj) {
 /** TODO: Remove Dumbie Data */
 function setLocalStorage(location, data, projViewObj) {
 	localStorage.setItem(location, JSON.stringify(data));
-	let projectData = JSON.parse(localStorage.getItem(location));
+	let projectsData = JSON.parse(localStorage.getItem(location));
 
-	if (projectData) {
-		projectData.activeProjects.forEach(function (project) {
+	if (projectsData) {
+		projectsData.active.forEach(function (project) {
 			let keys = [];
 			for (const prop in project) {
 				keys.push(project[prop]);
 			}
+
 			projViewObj.addCard(keys);
 		});
 	}
 }
 
-export { LocalData };
+function addProjectToStorage(newProjectData) {
+	let allData = JSON.parse(localStorage.getItem("projects"));
+
+	allData.active.push(newProjectData);
+	localStorage.setItem("projects", JSON.stringify(allData));
+
+	let keys = [];
+	for (const prop in newProjectData) {
+		keys.push(newProjectData[prop]);
+	}
+	console.log(keys);
+	return keys;
+	// projViewObj.addCard(keys);
+}
+
+export { LocalData, setLocalStorage, addProjectToStorage };
