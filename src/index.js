@@ -4,6 +4,8 @@ import { HeaderController } from "./header";
 import { HTMLElement } from "./helper.js";
 import { NavController } from "./navController";
 import { CreateController } from "./create";
+import { EditPageController } from "./editPageController";
+import { allData } from "./dataController";
 import {
 	ProjectStorage,
 	addProjectToStorage,
@@ -59,6 +61,20 @@ class App {
 			card.deleteBtn.dom.addEventListener("click", () => {
 				deleteProjectFromStorage(card.id, projectStorage);
 				cardController.deleteCard(card.wrapper.dom);
+			});
+		});
+
+		/** Add edit project Listener: */
+		// console.log(projectStorage);
+
+		cardController.allCards.forEach((card) => {
+			card.editBtn.dom.addEventListener("click", () => {
+				let editPageController = new EditPageController(card);
+				navController.changePageContent(
+					"create",
+					editPageController.dom.wrapper,
+					this.pageContent.dom
+				);
 			});
 		});
 	}

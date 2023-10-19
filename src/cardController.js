@@ -30,6 +30,12 @@ class Card {
 			this.wrapper.dom,
 			"X"
 		);
+		this.editBtn = new HTMLElement(
+			"button",
+			["edit-btn", "btn"],
+			this.wrapper.dom,
+			"Edit"
+		);
 		this.description = new HTMLElement(
 			"p",
 			["description"],
@@ -47,17 +53,12 @@ class Card {
 			["todos-wrapper"],
 			this.wrapper.dom
 		);
+		this.todoList = [];
 		todos.forEach((todo) => {
-			new HTMLElement("li", ["todo"], this.todoWrapper.dom, todo);
+			let newToDo = new HTMLElement("li", ["todo"], this.todoWrapper.dom, todo);
+			this.todoList.push(todo);
 		});
-
-		// this.deleteBtn.dom.addEventListener("click", (e) => {
-		// 	e.preventDefault();
-		// 	// console.log(id);
-		// });
 	}
-	// deleteProject(e) {
-	// }
 }
 
 class CardController {

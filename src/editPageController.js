@@ -1,14 +1,14 @@
 import { HTMLElement, InputElement, Button } from "./helper";
 
-class CreateForm {
-	constructor() {
+class EditForm {
+	constructor(data) {
 		this.wrapper = new HTMLElement("div", ["form-wrapper"]);
 		this.form = new HTMLElement("form", [], this.wrapper.dom);
 		this.formTitle = new HTMLElement(
 			"h2",
 			["form-title"],
 			this.form.dom,
-			"Add Tasks"
+			"Edit Project"
 		);
 		this.titleLabel = new HTMLElement(
 			"label",
@@ -20,7 +20,8 @@ class CreateForm {
 			"input",
 			[],
 			this.titleLabel.dom,
-			"text"
+			"text",
+			data.title
 		);
 		this.titleInput.dom.required = true;
 
@@ -34,7 +35,8 @@ class CreateForm {
 			"input",
 			[],
 			this.dueDateLabel.dom,
-			"date"
+			"date",
+			data.dueDate
 		);
 		this.priorityLabel = new HTMLElement(
 			"label",
@@ -58,6 +60,13 @@ class CreateForm {
 		opt_2.value = 2;
 		opt_3.value = 3;
 
+		let allOptions = [opt_0, opt_1, opt_2, opt_3];
+		allOptions.forEach((option) => {
+			if (option.value === data.priority) {
+				option.selected = true;
+			}
+		});
+
 		this.descriptionLabel = new HTMLElement(
 			"label",
 			["long-row"],
@@ -69,6 +78,7 @@ class CreateForm {
 			[],
 			this.descriptionLabel.dom
 		);
+		this.descriptionInput.dom.value = data.description;
 
 		this.todosLabel = new HTMLElement(
 			"label",
@@ -88,6 +98,14 @@ class CreateForm {
 			this.todosLabel.dom,
 			"Temp Todos"
 		);
+
+		if (data.todoList.length > 0) {
+			console.log(data.todoList);
+			data.todoList.forEach((todo) => {
+				this.listToDoItem(todo);
+			});
+		}
+
 		this.todosButton = new Button(
 			"button",
 			["add-todo-btn"],
@@ -106,7 +124,9 @@ class CreateForm {
 
 	/** Methods: */
 	listToDoItem(todoItem) {
-		new HTMLElement("li", ["temp-todo"], this.listedToDoItems.dom, todoItem);
+		let todoWrapper = new HTMLElement("div", [], this.listedToDoItems.dom);
+		new HTMLElement("li", ["temp-todo"], todoWrapper.dom, todoItem);
+		new Button("button", ["delete-todo"], this.listedToDoItems.dom, "X");
 	}
 	clearToDoInput() {
 		this.todosInput.dom.value = "";
@@ -116,8 +136,9 @@ class CreateForm {
 	}
 }
 
-class CreateController {
-	constructor() {
+class EditPageController {
+	constructor(data) {
+		console.log(data);
 		this.newData = {
 			id: "",
 			title: "",
@@ -126,7 +147,7 @@ class CreateController {
 			priority: "",
 			todos: [],
 		};
-		this.dom = new CreateForm();
+		this.dom = new EditForm(data);
 
 		/** Add event listeners: */
 		this.dom.todosButton.dom.addEventListener("click", (e) => {
@@ -144,6 +165,10 @@ class CreateController {
 		}
 
 		this.dom.clearToDoInput();
+	}
+	deleteToDoItem(todo) {
+		let indexToDelete = this.newData.todos.findIndex((item) => item === todo);
+		this.newData.todos.splice(indexToDelete, 1);
 	}
 
 	clearData() {
@@ -170,4 +195,4 @@ class CreateController {
 	}
 }
 
-export { CreateForm, CreateController };
+export { EditPageController };

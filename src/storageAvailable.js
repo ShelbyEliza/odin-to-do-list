@@ -33,7 +33,7 @@ function ProjectStorage(location) {
 		/** check if user has existing projects storage: */
 		let projectStorage = JSON.parse(localStorage.getItem(location));
 		if (projectStorage) {
-			console.log("User has existing Storage:", projectStorage);
+			// console.log("User has existing Storage:", projectStorage);
 			return projectStorage;
 		} else {
 			console.log("User has no previous data.");

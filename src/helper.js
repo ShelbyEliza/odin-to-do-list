@@ -17,8 +17,6 @@ class HTMLElement {
 		}
 		if (parentElement) {
 			this.parentElement.appendChild(this.dom);
-		} else {
-			// console.log("Element has not been appended to dom");
 		}
 	}
 	getElement() {
@@ -34,27 +32,16 @@ class Button extends HTMLElement {
 		super(element, className, parentElement, value);
 
 		this.dom.value = value;
-		// this.dom.addEventListener("click", (e) => {
-		// 	e.preventDefault();
-		// 	if (this.value === "Add To Do") {
-		// 		this.addToDo(e);
-		// 	} else {
-		// 		submitForm(e);
-		// 	}
-		// });
 	}
-	// addToDo(e) {
-	// 	console.log(e);
-	// }
-	// submitForm(e) {
-	// 	console.log(e);
-	// }
 }
 
 class InputElement extends HTMLElement {
-	constructor(element, className, parentElement, type) {
+	constructor(element, className, parentElement, type, value) {
 		super(element, className, parentElement);
 		this.dom.type = type;
+		if (value) {
+			this.dom.value = value;
+		}
 	}
 }
 
