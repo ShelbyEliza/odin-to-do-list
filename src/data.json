@@ -15,19 +15,6 @@
 				]
 			},
 			{
-				"id": "2",
-				"title": "Play with Cats",
-				"dueDate": "11/12/2023",
-				"description": "Clean up the kitchen, living room, and bathroom.",
-				"priority": "5",
-				"todos": [
-					"Plan meal",
-					"Add ingredients to the list",
-					"Buy groceries",
-					"Cook dinner"
-				]
-			},
-			{
 				"id": "3",
 				"title": "Play with Cats",
 				"dueDate": "11/12/2023",

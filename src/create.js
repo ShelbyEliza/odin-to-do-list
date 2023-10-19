@@ -1,5 +1,4 @@
 import { HTMLElement, InputElement, Button } from "./helper";
-import { setLocalStorage } from "./storageAvailable";
 
 class CreateForm {
 	constructor() {
@@ -98,7 +97,7 @@ class CreateForm {
 
 class CreateController {
 	constructor() {
-		this.projectData = {
+		this.newData = {
 			id: "",
 			title: "",
 			dueDate: "",
@@ -113,18 +112,13 @@ class CreateController {
 			e.preventDefault();
 			this.addToDoItem();
 		});
-		// this.dom.submitButton.dom.addEventListener("click", (e) => {
-		// 	e.preventDefault();
-
-		// 	this.submitForm();
-		// });
 	}
 
 	/** Methods: */
 	addToDoItem() {
 		let todo = this.dom.todosInput.dom.value;
-		if (todo !== "" && !this.projectData.todos.includes(todo)) {
-			this.projectData.todos.push(todo);
+		if (todo !== "" && !this.newData.todos.includes(todo)) {
+			this.newData.todos.push(todo);
 			this.dom.listToDoItem(todo);
 		}
 
@@ -132,7 +126,7 @@ class CreateController {
 	}
 
 	clearData() {
-		this.projectData = {
+		this.newData = {
 			id: "",
 			title: "",
 			dueDate: "",
@@ -146,21 +140,13 @@ class CreateController {
 		return title[0] + title[2] + title[3] + "-" + randomNumb;
 	}
 
-	setProjectData() {
-		this.projectData.title = this.dom.titleInput.dom.value;
-		this.projectData.dueDate = this.dom.dueDateInput.dom.value;
-		this.projectData.description = this.dom.descriptionInput.dom.value;
-		this.projectData.priority = "1";
-		this.projectData.id = this.assignID(this.dom.titleInput.dom.value);
+	setNewData() {
+		this.newData.title = this.dom.titleInput.dom.value;
+		this.newData.dueDate = this.dom.dueDateInput.dom.value;
+		this.newData.description = this.dom.descriptionInput.dom.value;
+		this.newData.priority = "1";
+		this.newData.id = this.assignID(this.dom.titleInput.dom.value);
 	}
-
-	// submitForm() {
-	// 	this.setProjectData();
-
-	// 	setLocalStorage("projects", this.projectData, )
-
-	// 	console.log("I'm trying to submit the form.");
-	// }
 }
 
 export { CreateForm, CreateController };

@@ -24,6 +24,12 @@ class Card {
 			this.wrapper.dom,
 			dueDate
 		);
+		this.deleteBtn = new HTMLElement(
+			"button",
+			["delete-btn", "btn"],
+			this.wrapper.dom,
+			"X"
+		);
 		this.description = new HTMLElement(
 			"p",
 			["description"],
@@ -44,23 +50,29 @@ class Card {
 		todos.forEach((todo) => {
 			new HTMLElement("li", ["todo"], this.todoWrapper.dom, todo);
 		});
+
+		// this.deleteBtn.dom.addEventListener("click", (e) => {
+		// 	e.preventDefault();
+		// 	// console.log(id);
+		// });
 	}
+	// deleteProject(e) {
+	// }
 }
 
 class CardController {
-	constructor(pageWrapper, data) {
+	constructor(pageWrapper) {
+		this.allCards = [];
 		this.allCardsWrapper = new AllCards(pageWrapper);
-		if (data) {
-			data.forEach((project) => {
-				new Card(this.allCardsWrapper.dom);
-			});
-		}
 	}
 
 	addCard(projectProps) {
-		// console.log(this.allCardsWrapper.wrapper.dom);
-
-		return new Card(this.allCardsWrapper.wrapper.dom, ...projectProps);
+		let newCard = new Card(this.allCardsWrapper.wrapper.dom, ...projectProps);
+		this.allCards.push(newCard);
+		return newCard;
+	}
+	deleteCard(cardDom) {
+		cardDom.remove();
 	}
 }
 

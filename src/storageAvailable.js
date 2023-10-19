@@ -1,4 +1,4 @@
-function storageAvailable() {
+function isStorageAvailable() {
 	let storage;
 	try {
 		storage = window["localStorage"];
@@ -25,40 +25,24 @@ function storageAvailable() {
 	}
 }
 
-function LocalData(location, data, projViewObj) {
-	if (!storageAvailable()) {
+function ProjectStorage(location) {
+	/** check if storage can be used: */
+	if (!isStorageAvailable()) {
 		throw new Error("LocalStorage is not available");
 	} else {
-		if (Storage.length > 0) {
-			/** user has existing storage */
-			console.log("User has existing Storage:", Storage);
+		/** check if user has existing projects storage: */
+		let projectStorage = JSON.parse(localStorage.getItem(location));
+		if (projectStorage) {
+			console.log("User has existing Storage:", projectStorage);
+			return projectStorage;
 		} else {
-			/** TODO: Remove Dumbie Data */
-			setLocalStorage(location, data, projViewObj);
+			console.log("User has no previous data.");
+			return false;
 		}
 	}
 }
 
-/** TODO: Remove Dumbie Data */
-function setLocalStorage(location, data, projViewObj) {
-	localStorage.setItem(location, JSON.stringify(data));
-	let projectsData = JSON.parse(localStorage.getItem(location));
-
-	if (projectsData) {
-		projectsData.active.forEach(function (project) {
-			let keys = [];
-			for (const prop in project) {
-				keys.push(project[prop]);
-			}
-
-			projViewObj.addCard(keys);
-		});
-	}
-}
-
-function addProjectToStorage(newProjectData) {
-	let allData = JSON.parse(localStorage.getItem("projects"));
-
+function addProjectToStorage(newProjectData, allData) {
 	allData.active.push(newProjectData);
 	localStorage.setItem("projects", JSON.stringify(allData));
 
@@ -66,9 +50,16 @@ function addProjectToStorage(newProjectData) {
 	for (const prop in newProjectData) {
 		keys.push(newProjectData[prop]);
 	}
-	console.log(keys);
 	return keys;
-	// projViewObj.addCard(keys);
 }
 
-export { LocalData, setLocalStorage, addProjectToStorage };
+function deleteProjectFromStorage(projectToDelete, allData) {
+	let toKeep = allData.active.filter(
+		(project) => project.id !== projectToDelete
+	);
+
+	allData.active = toKeep;
+	localStorage.setItem("projects", JSON.stringify(allData));
+}
+
+export { ProjectStorage, addProjectToStorage, deleteProjectFromStorage };
